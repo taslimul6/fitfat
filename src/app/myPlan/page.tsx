@@ -1,32 +1,36 @@
-import { FiCheck, FiClock, FiStar, FiX } from "react-icons/fi";
-import { LuFlame } from "react-icons/lu";
+'use client'
+
+import { useState } from "react";
 import PlanCard from "../components/myplan/PlanCard";
 import PlanStats from "../components/myplan/PlanStats";
+import SavedCard from "../components/myplan/SavedCard.tsx";
 
-const exercises = [
-  {
-    id: 1,
-    name: "Dumbbell Bicep Curl",
-    equipment: "Dumbbells",
-    image: "/images/dumbbell-bicep-curl.jpg",
-    duration: 12,
-    caloriesBurned: 80,
-    rating: 4.3,
-  },
-  {
-    id: 2,
-    name: "Back Squat",
-    equipment: "Barbell, Rack",
-    image: "/images/back-squat.jpg",
-    duration: 30,
-    caloriesBurned: 240,
-    rating: 4.9,
-  },
-];
+ const exercises = [
+    {
+      id: 1,
+      name: "Dumbbell Bicep Curl",
+      equipment: "Dumbbells",
+      image: "/images/dumbbell-bicep-curl.jpg",
+      duration: 12,
+      caloriesBurned: 80,
+      rating: 4.3,
+    },
+    {
+      id: 2,
+      name: "Back Squat",
+      equipment: "Barbell, Rack",
+      image: "/images/back-squat.jpg",
+      duration: 30,
+      caloriesBurned: 240,
+      rating: 4.9,
+    },
+  ];
 
 
 
 const MyPlan = () => {
+  const [activeTab, setActiveTab] = useState("today");
+
   return (
     <main className="min-h-screen bg-[#15171B] px-4 py-9 text-white">
       <div className="mx-auto max-w-6xl">
@@ -38,17 +42,28 @@ const MyPlan = () => {
         <PlanStats />
 
         <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          {/* Tabs */}
           <div className="flex w-fit rounded-2xl bg-[#202329] p-1">
             <button
               type="button"
-              className="rounded-xl bg-[#15171B] px-4 py-2 text-sm font-semibold text-[#B8F000]"
+              onClick={() => setActiveTab("today")}
+              className={`rounded-xl px-4 py-2 text-sm ${
+                activeTab === "today"
+                  ? "bg-[#15171B] font-semibold text-[#B8F000]"
+                  : "text-[#AEB5BF]"
+              }`}
             >
               Today's Plan
             </button>
 
             <button
               type="button"
-              className="rounded-xl px-4 py-2 text-sm text-[#AEB5BF]"
+              onClick={() => setActiveTab("saved")}
+              className={`rounded-xl px-4 py-2 text-sm ${
+                activeTab === "saved"
+                  ? "bg-[#15171B] font-semibold text-[#B8F000]"
+                  : "text-[#AEB5BF]"
+              }`}
             >
               Saved
             </button>
@@ -65,10 +80,11 @@ const MyPlan = () => {
           </label>
         </div>
 
+        {/* Tab Content */}
         <div className="mt-7 space-y-4">
-          {exercises.map((ex) => (
-            <PlanCard key={ex.id} ex={ex} />
-          ))}
+          {activeTab === "today"
+            ? exercises.map((ex) => <PlanCard key={ex.id} ex={ex} />)
+            : exercises.map((ex) => <SavedCard key={ex.id} ex={ex} />)}
         </div>
       </div>
     </main>

@@ -1,4 +1,7 @@
-import { FiBookmark, FiCalendar } from "react-icons/fi";
+
+import PlanBtn from "@/app/components/DetailPage/PlanBtn";
+import SaveBtn from "@/app/components/DetailPage/SaveBtn";
+
 
 const getExerciseData = async () => {
   const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
@@ -6,20 +9,18 @@ const getExerciseData = async () => {
   return data;
 };
 
-const ExerciseDetailPage = async( {params} ) => {
+const ExerciseDetailPage = async ({ params }) => {
+  
 
-
-    const {id} = await params;
-
-    const exercises = await getExerciseData();
-    console.log(exercises[0].id )
-
-    const ex = exercises.find(e=> e.id == id);
-
+  const { id } = await params;
+  const exercises = await getExerciseData();
+  const ex = exercises.find((e) => e.id == id);
 
   if (!ex) {
     return <p className="p-8 text-white">Exercise not found.</p>;
   }
+
+  
 
   return (
     <main className="min-h-screen bg-[#15171B] px-4 py-9 text-white">
@@ -35,9 +36,7 @@ const ExerciseDetailPage = async( {params} ) => {
         <div>
           <h1 className="text-3xl font-bold uppercase">{ex.name}</h1>
 
-          <p className="mt-3 leading-6 text-[#B8BFC9]">
-            {ex.description}
-          </p>
+          <p className="mt-3 leading-6 text-[#B8BFC9]">{ex.description}</p>
 
           {/* Muscle Groups */}
           <div className="mt-4 flex flex-wrap gap-2">
@@ -66,9 +65,7 @@ const ExerciseDetailPage = async( {params} ) => {
                 key={label}
                 className="grid grid-cols-2 border-b border-[#30343B] px-4 py-3 last:border-b-0"
               >
-                <span className="text-sm font-semibold uppercase">
-                  {label}
-                </span>
+                <span className="text-sm font-semibold uppercase">{label}</span>
                 <span className="text-sm">{value}</span>
               </div>
             ))}
@@ -89,21 +86,10 @@ const ExerciseDetailPage = async( {params} ) => {
 
           {/* Buttons */}
           <div className="mt-5 flex flex-wrap gap-3">
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-full bg-[#B8F000] px-4 py-2 text-sm font-semibold text-black hover:bg-[#A5D800]"
-            >
-              <FiCalendar />
-              Add to today's plan
-            </button>
+            <PlanBtn ex={ex} />
+            <SaveBtn ex={ex} />
 
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-full border border-[#B8BFC9] px-4 py-2 text-sm font-semibold hover:border-[#B8F000]"
-            >
-              <FiBookmark />
-              Save for later
-            </button>
+           
           </div>
         </div>
       </div>
