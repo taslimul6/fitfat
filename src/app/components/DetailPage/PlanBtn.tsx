@@ -1,11 +1,12 @@
 'use client'
 
 import { exerciseContext } from "@/app/context/exerciseContext";
+import type { Exercise } from "@/app/context/exerciseContext";
 import React, { useContext } from "react";
 import { FiCalendar } from "react-icons/fi";
 import { toast } from "react-toastify";
 
-const PlanBtn = ({ex}) => {
+const PlanBtn = ({ex}: {ex: Exercise}) => {
 
     const {planList, setPlanList} = useContext(exerciseContext);
 

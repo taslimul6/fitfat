@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { FiClock, FiStar } from "react-icons/fi";
 import { LuFlame } from "react-icons/lu";
+import type { Exercise } from "@/app/context/exerciseContext";
 
-const ExercisesCard = ({ ex }) => {
+const ExercisesCard = ({ ex }: { ex: Exercise & { muscleGroups: string[] } }) => {
   return (
     <Link href={`/exercise/${ex.id}`}>
       <div className="overflow-hidden rounded-[20px] border border-[#292D33] bg-[#191C22] transition-colors hover:border-[#B8F000]">

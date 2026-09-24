@@ -1,15 +1,29 @@
-
 import PlanBtn from "@/app/components/DetailPage/PlanBtn";
 import SaveBtn from "@/app/components/DetailPage/SaveBtn";
 
+type Exercise = {
+  id: number | string;
+  image: string;
+  name: string;
+  description: string;
+  muscleGroups?: string[];
+  equipment: string;
+  difficulty: string;
+  sets: number;
+  reps: number | string;
+  duration: number;
+  caloriesBurned: number;
+  rating: number;
+  instructions?: string[];
+};
 
-const getExerciseData = async () => {
+const getExerciseData = async (): Promise<Exercise[]> => {
   const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
   const data = await res.json();
   return data;
 };
 
-const ExerciseDetailPage = async ({ params }) => {
+const ExerciseDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   
 
   const { id } = await params;

@@ -1,20 +1,21 @@
 'use client'
 
 import { exerciseContext } from "@/app/context/exerciseContext";
+import type { Exercise } from "@/app/context/exerciseContext";
 import Link from "next/link";
 import { useContext } from "react";
 import { FiCheck, FiClock, FiStar, FiX } from "react-icons/fi";
 import { LuFlame } from "react-icons/lu";
 import { toast } from "react-toastify";
 
-const PlanCard = ({ ex }) => {
+const PlanCard = ({ ex }: { ex: Exercise }) => {
   const { planList, setPlanList } = useContext(exerciseContext);
 
-  const handleX = (hx) => {
+  const handleX = (hx: Exercise) => {
     setPlanList([...planList.filter((e) => e.id != hx.id)]);
     toast.error(hx.name + " Plan Removed");
   };
-   const handleDone = (hx) => {
+   const handleDone = (hx: Exercise) => {
     setPlanList([...planList.filter((e) => e.id != hx.id)]);
     toast.success(hx.name + " Plan Done Successfully");
   };

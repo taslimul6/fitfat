@@ -2,13 +2,14 @@
 
 import { exerciseContext } from "@/app/context/exerciseContext";
 import { useContext, useState } from "react";
+import type { ChangeEvent } from "react";
 
 const Sort = () => {
   const { planList, setPlanList, savedPlan, setSavedPlan } =
     useContext(exerciseContext);
   const [sorted, setSorted] = useState("duration");
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setSorted(selectedValue);
 

@@ -1,10 +1,11 @@
 'use client'
 import { exerciseContext } from "@/app/context/exerciseContext";
+import type { Exercise } from "@/app/context/exerciseContext";
 import React, { useContext } from "react";
 import { FiBookmark } from "react-icons/fi";
 import { toast } from "react-toastify";
 
-const SaveBtn = ({ex}) => {
+const SaveBtn = ({ex}: {ex: Exercise}) => {
   const { savedPlan, setSavedPlan } = useContext(exerciseContext);
 
   const handleSaveBtn = () => {
