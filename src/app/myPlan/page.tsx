@@ -6,6 +6,7 @@ import PlanStats from "../components/myplan/PlanStats";
 import SavedCard from "../components/myplan/SavedCard";
 import { exerciseContext } from "../context/exerciseContext";
 import SavedStats from "../components/myplan/SavedStats";
+import Sort from "../components/myplan/Sort";
 
 
 
@@ -62,15 +63,7 @@ const MyPlan = () => {
             </button>
           </div>
 
-          <label className="flex flex-col gap-1 text-sm">
-            Sort By
-            <select className="w-full rounded-xl border border-[#40444B] bg-[#15171B] px-3 py-2 outline-none sm:w-70">
-              <option>Duration</option>
-              <option>Calories</option>
-              <option>Rating</option>
-              <option>Name</option>
-            </select>
-          </label>
+         <Sort />
         </div>
 
         {/* Tab Content */}
