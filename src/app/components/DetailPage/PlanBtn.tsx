@@ -19,10 +19,8 @@ const PlanBtn = ({ex}) => {
 
         }
 
-        
-
     }
-    console.log(planList)
+    
 
   return (
     <div>

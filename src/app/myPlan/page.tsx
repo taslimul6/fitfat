@@ -1,35 +1,26 @@
-'use client'
+"use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PlanCard from "../components/myplan/PlanCard";
 import PlanStats from "../components/myplan/PlanStats";
-import SavedCard from "../components/myplan/SavedCard.tsx";
-
- const exercises = [
-    {
-      id: 1,
-      name: "Dumbbell Bicep Curl",
-      equipment: "Dumbbells",
-      image: "/images/dumbbell-bicep-curl.jpg",
-      duration: 12,
-      caloriesBurned: 80,
-      rating: 4.3,
-    },
-    {
-      id: 2,
-      name: "Back Squat",
-      equipment: "Barbell, Rack",
-      image: "/images/back-squat.jpg",
-      duration: 30,
-      caloriesBurned: 240,
-      rating: 4.9,
-    },
-  ];
+import SavedCard from "../components/myplan/SavedCard";
+import { exerciseContext } from "../context/exerciseContext";
+import SavedStats from "../components/myplan/SavedStats";
 
 
+
+
+ 
 
 const MyPlan = () => {
   const [activeTab, setActiveTab] = useState("today");
+
+  const { planList, setPlanList, savedPlan, setSavedPlan } = useContext(exerciseContext);
+
+
+ 
+
+
 
   return (
     <main className="min-h-screen bg-[#15171B] px-4 py-9 text-white">
@@ -39,7 +30,9 @@ const MyPlan = () => {
           Cap of five lifts for today. Finish them, then load more.
         </p>
 
-        <PlanStats />
+        {activeTab ==='today' ? <PlanStats /> : <SavedStats />}
+
+        
 
         <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           {/* Tabs */}
@@ -83,8 +76,8 @@ const MyPlan = () => {
         {/* Tab Content */}
         <div className="mt-7 space-y-4">
           {activeTab === "today"
-            ? exercises.map((ex) => <PlanCard key={ex.id} ex={ex} />)
-            : exercises.map((ex) => <SavedCard key={ex.id} ex={ex} />)}
+            ? planList.map((ex) => <PlanCard key={ex.id} ex={ex} />)
+            : savedPlan.map((ex) => <SavedCard key={ex.id} ex={ex} />)}
         </div>
       </div>
     </main>
