@@ -7,21 +7,13 @@ import SavedCard from "../components/myplan/SavedCard";
 import { exerciseContext } from "../context/exerciseContext";
 import SavedStats from "../components/myplan/SavedStats";
 import Sort from "../components/myplan/Sort";
-
-
-
-
- 
+import EmptyPlanCard from "../components/myplan/NoCard";
 
 const MyPlan = () => {
   const [activeTab, setActiveTab] = useState("today");
 
-  const { planList, setPlanList, savedPlan, setSavedPlan } = useContext(exerciseContext);
-
-
- 
-
-
+  const { planList, setPlanList, savedPlan, setSavedPlan } =
+    useContext(exerciseContext);
 
   return (
     <main className="min-h-screen bg-[#15171B] px-4 py-9 text-white">
@@ -31,9 +23,7 @@ const MyPlan = () => {
           Cap of five lifts for today. Finish them, then load more.
         </p>
 
-        {activeTab ==='today' ? <PlanStats /> : <SavedStats />}
-
-        
+        {activeTab === "today" ? <PlanStats /> : <SavedStats />}
 
         <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           {/* Tabs */}
@@ -63,14 +53,22 @@ const MyPlan = () => {
             </button>
           </div>
 
-         <Sort />
+          <Sort />
         </div>
 
         {/* Tab Content */}
         <div className="mt-7 space-y-4">
-          {activeTab === "today"
-            ? planList.map((ex) => <PlanCard key={ex.id} ex={ex} />)
-            : savedPlan.map((ex) => <SavedCard key={ex.id} ex={ex} />)}
+          {activeTab === "today" ? (
+            planList.length > 0 ? (
+              planList.map((ex) => <PlanCard key={ex.id} ex={ex} />)
+            ) : (
+              <EmptyPlanCard />
+            )
+          ) : savedPlan.length > 0 ? (
+            savedPlan.map((ex) => <SavedCard key={ex.id} ex={ex} />)
+          ) : (
+            <EmptyPlanCard />
+          )}
         </div>
       </div>
     </main>

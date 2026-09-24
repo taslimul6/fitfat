@@ -12,7 +12,7 @@ const Exercises = async () => {
 
   return (
     <>
-      <div className="mt-12 mb-8 w-[85%] mx-auto">
+      <div id="ex" className="mt-12 mb-8 w-[85%] mx-auto">
         <h2 className="text-4xl font-bold uppercase tracking-wide text-white">
           The Library
         </h2>

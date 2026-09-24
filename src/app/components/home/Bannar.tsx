@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 
@@ -23,9 +24,13 @@ const Banner = () => {
             add up.
           </p>
 
+          <Link href="/#ex">
+          
+          
           <button className="mt-7 rounded-[18px] bg-[#B8F000] px-6 py-4 text-[17px] font-bold text-[#10120D] transition hover:bg-[#C5FF19]">
             Browse Workouts
           </button>
+          </Link>
         </div>
 
         {/* Right Image */}
